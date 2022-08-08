@@ -1,4 +1,3 @@
-//const baseURL = "http://localhost:1990/api";
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export const fetchWithoutToken = (
