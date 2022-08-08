@@ -1,4 +1,5 @@
-import { FC } from "react";
+import Link from "next/link";
+import React, { FC } from "react";
 import { fetchWithoutToken } from "../../api/apiFetch";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { getPosts } from "../../store/slices/posts/postSlice";
@@ -25,16 +26,16 @@ export const getStaticProps = async () => {
 
 const HomePage: FC = (props: any) => {
   const dispatch = useAppDispatch();
-  const { posts } = useAppSelector((state) => state.posts);
   dispatch(getPosts(props.posts));
-
-  if (!posts.length) return <>Loading...</>;
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      {posts.map((post: any) => (
-        <span key={post.uid}>{post.title}</span>
-      ))}
+      {props.posts &&
+        props.posts.map((post: any) => (
+          <Link key={post.uid} href={`/blog/posts/post/${post.uid}`}>
+            <a>{post.title}</a>
+          </Link>
+        ))}
     </div>
   );
 };
