@@ -1,10 +1,17 @@
-import React, { BaseSyntheticEvent, FC } from "react";
+import React, { BaseSyntheticEvent, FC, useEffect } from "react";
 import Image from "next/image";
 import Head from "next/head";
 import { useForm } from "../../hooks/useForm";
 import styles from "../../styles/login.module.css";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { login } from "../../store/slices/auth/thunk";
+import { useRouter } from "next/router";
 
-const BlogDashboard: FC = () => {
+const LoginPage: FC = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state);
+
   const [formValues, handleInputChange] = useForm({
     loginEmail: "",
     loginPassword: "",
@@ -14,12 +21,20 @@ const BlogDashboard: FC = () => {
 
   const handleSubmit = (e: BaseSyntheticEvent) => {
     e.preventDefault();
-    const logInPayload = {
+    const loginPayload = {
       email: loginEmail,
       password: loginPassword,
     };
-    console.log(logInPayload);
+
+    dispatch(login(loginPayload));
   };
+
+  useEffect(() => {
+    if (user.name) {
+      router.push("/blog/blog-dashboard");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <>
@@ -51,4 +66,4 @@ const BlogDashboard: FC = () => {
     </>
   );
 };
-export default BlogDashboard;
+export default LoginPage;
