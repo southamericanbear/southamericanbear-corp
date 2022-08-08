@@ -1,5 +1,6 @@
 //const baseURL = process.env.REACT_APP_API_URL;
-const baseURL = "http://localhost:1990/api";
+//const baseURL = "http://localhost:1990/api";
+const baseURL = "https://blog-portfolio-server-production.up.railway.app/api";
 export const fetchWithoutToken = (
   endpoint: string,
   data: any,
