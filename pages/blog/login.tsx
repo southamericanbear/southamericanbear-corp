@@ -6,6 +6,7 @@ import { useForm } from "../../hooks/useForm";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { login } from "../../store/slices/auth/thunk";
 import styles from "../../styles/login.module.css";
+import DynamicHeadTag from "../../components/dynamicHeadTag";
 
 const LoginPage: FC = () => {
   const router = useRouter();
@@ -38,10 +39,7 @@ const LoginPage: FC = () => {
 
   return (
     <>
-      <Head>
-        <title>South American Bear | Blog Dashboard</title>
-        <link rel="icon" href="/images/bear.png" />
-      </Head>
+      <DynamicHeadTag title="Login" />
       <div className={styles.container}>
         <h1>Welcome Back!</h1>
         <Image height={100} width={100} src="/images/bear.png" alt="bear" />

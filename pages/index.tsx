@@ -1,14 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import DynamicHeadTag from "../components/dynamicHeadTag";
 
 const Home: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>South American Bear | Home</title>
-        <link rel="icon" href="/images/bear.png" />
-      </Head>
+      <DynamicHeadTag title="Home" />
       <h1>
         go to the
         <Link href="/blog/blog-dashboard">

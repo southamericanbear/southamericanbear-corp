@@ -1,10 +1,16 @@
 import React from "react";
+import DynamicHeadTag from "../../../components/dynamicHeadTag";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 
 const BlogDashboard = () => {
   const { user } = useAppSelector((state) => state);
 
-  return <div>welcome back {user.name}</div>;
+  return (
+    <>
+      <DynamicHeadTag title="Blog Dashboard" />
+      <div>welcome back {user.name}</div>
+    </>
+  );
 };
 
 // BlogDashboard.getInitialProps = async (props: any) => {

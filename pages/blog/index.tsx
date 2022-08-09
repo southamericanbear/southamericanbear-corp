@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { FC } from "react";
 import { fetchWithoutToken } from "../../api/apiFetch";
+import DynamicHeadTag from "../../components/dynamicHeadTag";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { getPosts } from "../../store/slices/posts/postSlice";
 import { SimplifyPost, IPosts } from "../../types/posts";
@@ -30,14 +31,17 @@ const HomePage: FC<IPosts> = ({ posts }) => {
   dispatch(getPosts(posts));
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      {posts &&
-        posts.map((post: SimplifyPost) => (
-          <Link key={post.uid} href={`/blog/posts/post/${post.uid}`}>
-            <a>{post.title}</a>
-          </Link>
-        ))}
-    </div>
+    <>
+      <DynamicHeadTag title="Blog" />
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {posts &&
+          posts.map((post: SimplifyPost) => (
+            <Link key={post.uid} href={`/blog/posts/post/${post.uid}`}>
+              <a>{post.title}</a>
+            </Link>
+          ))}
+      </div>
+    </>
   );
 };
 
