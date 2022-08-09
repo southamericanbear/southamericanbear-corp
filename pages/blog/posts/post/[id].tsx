@@ -1,12 +1,13 @@
 import { GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
-import React from "react";
+import React, { FC } from "react";
 import { fetchWithoutToken } from "../../../../api/apiFetch";
 import DynamicHeadTag from "../../../../components/dynamicHeadTag";
 import PostLayout from "../../../../components/layouts/PostLayout";
+import { Post } from "../../../../types/posts";
 
 type Props = {
-  post: any;
+  post: Post[];
 };
 
 interface Params extends ParsedUrlQuery {
@@ -38,14 +39,16 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
   };
 };
 
-const Post = ({ post }: any) => {
+const Post: FC<Post> = ({ post }) => {
+  const { title, post: content } = post;
+
   return (
     <PostLayout>
-      <DynamicHeadTag title={post.title} />
-      <h1 style={{ color: "black" }}>{post.title}</h1>
+      <DynamicHeadTag title={title} />
+      <h1 style={{ color: "black" }}>{title}</h1>
       <div
         style={{ color: "black" }}
-        dangerouslySetInnerHTML={{ __html: post.post }}
+        dangerouslySetInnerHTML={{ __html: content }}
       />
     </PostLayout>
   );

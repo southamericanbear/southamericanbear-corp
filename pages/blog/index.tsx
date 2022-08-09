@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { fetchWithoutToken } from "../../api/apiFetch";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { getPosts } from "../../store/slices/posts/postSlice";
+import { SimplifyPost, IPosts } from "../../types/posts";
 
 export const getStaticProps = async () => {
   // by now we are going to use this  this method to get
@@ -24,14 +25,14 @@ export const getStaticProps = async () => {
   }
 };
 
-const HomePage: FC = (props: any) => {
+const HomePage: FC<IPosts> = ({ posts }) => {
   const dispatch = useAppDispatch();
-  dispatch(getPosts(props.posts));
+  dispatch(getPosts(posts));
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      {props.posts &&
-        props.posts.map((post: any) => (
+      {posts &&
+        posts.map((post: SimplifyPost) => (
           <Link key={post.uid} href={`/blog/posts/post/${post.uid}`}>
             <a>{post.title}</a>
           </Link>
