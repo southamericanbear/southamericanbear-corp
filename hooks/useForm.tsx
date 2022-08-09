@@ -1,4 +1,4 @@
-import { useState, FC } from "react";
+import { useState } from "react";
 
 export const useForm = (initialState: any) => {
   const [values, setValues] = useState(initialState);

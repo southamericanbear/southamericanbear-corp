@@ -1,11 +1,11 @@
 import React, { BaseSyntheticEvent, FC, useEffect } from "react";
 import Image from "next/image";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useForm } from "../../hooks/useForm";
-import styles from "../../styles/login.module.css";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { login } from "../../store/slices/auth/thunk";
-import { useRouter } from "next/router";
+import styles from "../../styles/login.module.css";
 
 const LoginPage: FC = () => {
   const router = useRouter();
