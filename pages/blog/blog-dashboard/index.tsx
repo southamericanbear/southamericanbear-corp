@@ -1,10 +1,7 @@
-import { useRouter } from "next/router";
 import React from "react";
-import WrapperPrivateRoutes from "../../../components/routes/WrapperPrivateRoutes";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 
 const BlogDashboard = () => {
-  const router = useRouter();
   const { user } = useAppSelector((state) => state);
 
   return <div>welcome back {user.name}</div>;
